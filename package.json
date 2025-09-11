@@ -1,7 +1,7 @@
 {
   "name": "qa_proj_cypress_mentoria",
   "version": "1.0.0",
-  "description": "",
+  "description": "Este projeto tem o intuíto colaborativo, de aprendizado, e evolução de ambos os participantes.",
   "main": "index.js",
   "scripts": {
     "test": "cypress run --reporter mochawesome",
