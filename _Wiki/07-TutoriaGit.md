@@ -1,3 +1,5 @@
+        A parte 5 pode vir primeiro.
+        
         Parte 1 - Em MinhaBranch
 
             Desenvolvi novos testes, novos arquivos, alterações no projeto.
