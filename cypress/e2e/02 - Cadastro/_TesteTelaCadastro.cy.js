@@ -12,7 +12,7 @@ context('nomeDaTela', () =>
 			//Se houver
 			beforeEach(() => {
 				//Executa antes de cada it
-				cy.visit(Cypress.env("env1"));
+				cy.visit(Cypress.env("env2"));
 			});
 
 			//Se houver
