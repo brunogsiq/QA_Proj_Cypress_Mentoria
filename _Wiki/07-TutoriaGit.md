@@ -1,3 +1,30 @@
+Parte 1 - MinhaBranch
+
+Desenvolvi novos testes
+Icone do git - 
+Insere mensagem 
+Commit and Push 
+Yes
+
+Repositorio - GitHub
+
+Atualiza página
+Create Pull Request
+Avisa QA Lead para autorizar a sua mudança/atualização
+
+Depois que o QA Lead faz toda a modificação e te informa
+
+Vs Code - Main (Local)
+
+Pull from, escolhe origin main da nuvem
+Sincroniza
+
+Troca para branch local, com seu nome
+Merge e escolhe main local
+
+***Verificar
+
+
 🚀 Tutorial – Commit até atualização da branch (VS Code)
 1. Fazer Commit
 
