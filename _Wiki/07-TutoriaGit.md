@@ -1,28 +1,44 @@
-Parte 1 - MinhaBranch
+        Parte 1 - Em MinhaBranch
 
-Desenvolvi novos testes
-Icone do git - 
-Insere mensagem 
-Commit and Push 
-Yes
+            Desenvolvi novos testes, novos arquivos, alterações no projeto.
+                Clico em Icone do git.
+                    Em "message", colo uma mensagem de aviso do que foi feito.
+                        Clico na seta de droplist, escolho a opção Commit and Push e clico em Yes.
 
-Repositorio - GitHub
+        Parte 2 - No Repositorio - Site GitHub (Poderiam ser outros como gitlab, gitbucket)
 
-Atualiza página
-Create Pull Request
-Avisa QA Lead para autorizar a sua mudança/atualização
+            Atualiza página e vou para Home do projeto.
+                No dorplist de branchs, escolho a minha.
+                    Clico na opção aheado of main
+                        Deverá aparecer a opção para Create Pull Request
+                            Insiro a mensagem do PR.
+                                Avisa QA Lead para autorizar a sua mudança/atualização.
 
-Depois que o QA Lead faz toda a modificação e te informa
+        Parte 3 - QA Lead
 
-Vs Code - Main (Local)
+            Autoriza ou solicita correção do Merge
 
-Pull from, escolhe origin main da nuvem
-Sincroniza
+        Parte 4 - Vs Code
 
-Troca para branch local, com seu nome
-Merge e escolhe main local
+            Depois que o QA Lead faz toda a modificação e te informa
 
-***Verificar
+        Parte 5 - Vs Code 
+        
+            Preciso atualizar meu projeto, então, troco da minhaBranch para Main (Local, ou seja ícone do git).
+                Vou na opção do git (ícone no vscode)
+                    Escolhe a opção "Pull, Push", depois Pull From, Escolhe Origin Main (ícone nuvem).
+                        Sincroniza
+                            Troca para a branchLocal lá em baixo a esquerda.
+                                Hora de atualizar sua branch e deixar igual sua Main (tudo local, pois já trouxemos da nuvem)
+                                    Escolhe a opção Merge, e quando aparece a lista de branchs, escolhe a Main Local.
+
+        Resumo:
+            Nesta última parte fizemos o seguinte:
+                Trouxemos da nuvem as atualizações
+                Atualizamos sua Main local
+                Atualizamos sua branch de acordo com a branch
+
+***Verificar o tutorial abaixo:
 
 
 🚀 Tutorial – Commit até atualização da branch (VS Code)
