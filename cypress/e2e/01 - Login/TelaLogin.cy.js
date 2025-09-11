@@ -1,6 +1,3 @@
-//comentario - teste
-//Parte 2
-//parte3
 context('Tela Login', () => 
 {
 	let contexto = 1;
@@ -12,25 +9,24 @@ context('Tela Login', () =>
 		let complemento = 1;
 		describe(`${cenario} - Validações Visuais.`, () => 
 		{
-			//Se houver
 			beforeEach(() => {
-				//Executa antes de cada it
-				cy.visit(Cypress.env("env1"))
-				
+				cy.visit(Cypress.env("env1"));
+
 				cy.get('.login_logo')
 					.should('be.visible');
 			});
 
-						//Se houver
 			afterEach(() => {
-				//Executa depois de cada it
+				cy.clearAllLocalStorage();
+				cy.clearAllCookies();
+				cy.clearAllSessionStorage();
 			});
 			
 			it(`${teste}.${complemento} - Validar Campos Vazios`, () => //Primeiro teste V1
 			{
 				//Passo - Dado...
 				cy.get('.login_logo')
-					.should('be.visible');
+					.should('be.visible');// o que está estranho ou desnecessário?
 				//Passo - Quando...
 				cy.get('#user-name')
 					.should('be.empty');
@@ -40,40 +36,17 @@ context('Tela Login', () =>
 					.click()
 				//Passo - Então...
 				cy.get('[data-test="error"]')
-					.should('have.text','Epic sadface: Username is required')
+					.should('have.text','Epic sadface: Username is required')//
 					.and('be.visible')
+
+				//Como falamos de testes front, eu costumo primeiro validar que é visível .should('be.visible'), depois .and('alguma coisa')
 			});
-
-			/*
-			it(`${teste}.${complemento} - Primeiro Teste V2`, () => 
-			{
-				//Passo - Dado...
-
-				//Passo - Quando...
-
-				//Passo - Então...
-				TelaLogin.titulo
-        			.should('be.visible');
-			});
-			*/
-
-			/*
-			it(`${teste}.${complemento} - Primeiro Teste V3`, () => 
-			{
-				//Passo - Dado...
-
-				//Passo - Quando...
-
-				//Passo - Então...
-				cy.validaAcessoProjeto();
-			});
-			*/
 
 			it(`${teste}.${++complemento} - Validar "Username" preenchido e "Password" vazio`, () => 
 			{
 				//Passo - Dado...
 				cy.get('.login_logo')
-					.should('be.visible');
+					.should('be.visible');// o que está estranho ou desnecessário?
 				//Passo - Quando...
 				cy.get('[data-test="username"]')
 					.type('Asdfssdf')
@@ -82,14 +55,17 @@ context('Tela Login', () =>
 				//Passo - Então...
 				cy.get('[data-test="error"]')
 					.should('have.text','Epic sadface: Password is required')
-					.and('be.visible')				
+					.and('be.visible')	
+					
+				//atentar-se ao nomes dos testes
+				//atentar-se ao padrão dos testes com ;
 			});
 
 			it(`${teste}.${++complemento} - Validar "Password" preenchido e "Username" vazio`, () => 
 			{
 				//Passo - Dado...
 				cy.get('.login_logo')
-					.should('be.visible');
+					.should('be.visible');// o que está estranho ou desnecessário?
 				//Passo - Quando...
 				cy.get('[data-test="password"]')
 					.type('12345')
@@ -98,14 +74,17 @@ context('Tela Login', () =>
 				//Passo - Então...
 				cy.get('[data-test="error"]')
 					.should('have.text','Epic sadface: Username is required')
-					.and('be.visible')				
+					.and('be.visible')
+					
+				//atentar-se ao nomes dos testes
+				//atentar-se ao padrão dos testes com ;
 			});
 			
 			it(`${teste}.${++complemento} - Validar "Password" e "Username" preenchidos incorretamente`, () => 
 			{
 				//Passo - Dado...
 				cy.get('.login_logo')
-					.should('be.visible');
+					.should('be.visible');// o que está estranho ou desnecessário?
 				//Passo - Quando...
 				cy.get('[data-test="username"]')
 					.type('Asdfssdf')
@@ -116,14 +95,29 @@ context('Tela Login', () =>
 				//Passo - Então...
 				cy.get('[data-test="error"]')
 					.should('have.text','Epic sadface: Username and password do not match any user in this service')
-					.and('be.visible')								
+					.and('be.visible')
+					
+					//atentar-se ao nomes dos testes
+				//atentar-se ao padrão dos testes com ;
+				//trabalhar com sistema de escada para cada fluxo
+				//
+					//
+						//
+							//
+
+				//
+					//
+						//
+
+				//
+					//
 			});
 
 			it(`${teste}.${++complemento} - Validar Placeholder dos "Username" e "Password" sendo exibidos corretamente`, () => 
 			{
 				//Passo - Dado...
 				cy.get('.login_logo')
-					.should('be.visible');
+					.should('be.visible');// o que está estranho ou desnecessário?
 				//Passo - Quando...
 				
 				//Passo - Então...
@@ -144,6 +138,10 @@ context('Tela Login', () =>
 				});
 
 				*/
+
+				//Por questões de boas práticas, vamos evitar "comentários como o acima no projeto"
+
+				//este teste poderá copiar para seu projeto pessoal de dicas
 			});
 
 			it(`${teste}.${++complemento} - Validar se o botao de fechar o erro esta sendo exibido`, () => 
@@ -176,6 +174,9 @@ context('Tela Login', () =>
 				//Então
 				cy.get('[data-test="error-button"]')
 					.click()
+
+					//atentar-se ao nomes dos testes
+				//atentar-se ao padrão dos testes com ;
 			});
 
 			it(`${teste}.${++complemento} - Validar login com sucesso`, () => 
@@ -197,6 +198,10 @@ context('Tela Login', () =>
 				cy.get('.inventory_list')
 					.should('be.visible'); // Valida elemento da página
 				
+
+					//atentar-se ao nomes dos testes
+				//atentar-se ao padrão dos testes com ;
+				//trabalhar com sistema de escada para cada fluxo
 			});
 		});
 	});
