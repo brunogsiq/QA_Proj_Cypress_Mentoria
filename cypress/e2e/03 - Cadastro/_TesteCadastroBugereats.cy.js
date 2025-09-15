@@ -1,144 +1,359 @@
-context('Tela de Cadastro - ', () => 
+context('Buger Eats', () => 
 {
 	let contexto = 1;
 	let cenario = 1;
 	let teste = 1;
 
-	context(`${contexto} - Critérios de aceite.`, () => 
+	context('Tela Home', () => 
 	{
-		let complemento = 1;
-		describe(`${cenario} - Validações Visuais.`, () => 
+		context(`${contexto} - Critérios de aceite.`, () => 
 		{
-			//Se houver
-			beforeEach(() => {
-				//cy.Hook_AcessaPaginaCadastro();
-			});
+			let complemento = 1;
+			describe(`${cenario} - Validações Visuais.`, () => 
+			{
+				beforeEach(() => {
+					cy.visit(Cypress.env('env3'));
+				});
 
-			//Se houver
-			afterEach(() => {
-				cy.clearAllLocalStorage();
+				afterEach(() => {
+					cy.clearAllLocalStorage();
 					cy.clearAllCookies();
-						cy.clearAllSessionStorage();
+					cy.clearAllSessionStorage();
+				});
+
+				it(`${teste}.${complemento} - Valida acesso ao projeto.`, () => 
+				{
+					cy.url()
+						.should('be.equal', 'https://buger-eats-qa.vercel.app/');
+				});
+
+				it(`${teste}.${complemento} - Valida layout.`, () => 
+				{
+					//Dado que a tela home está sendo visualizada
+					//Quando validar os elementos em tela
+					cy.waitUntil(() =>
+						cy.get('img')
+							.should('be.visible')
+					);
+
+					/*Então o sistema deverá apresentar
+						*Logotipo
+						*Título
+						*Sub-título
+						*Botão
+						*Background Imagem
+					*/
+					cy.get('img')
+						.should('be.visible')
+						.and('have.attr', 'alt', 'Buger Eats');
+
+					cy.get('h1')
+						.should('be.visible')
+						.and('have.text', 'Seja um parceiro entregador pela Buger Eats')
+						.and('have.css', 'color', 'rgb(50, 33, 83)');
+
+					cy.get('p')
+						.should('be.visible')
+						.and('have.text', 'Em vez de oportunidades tradicionais de entrega de refeições em horários pouco flexíveis, seja seu próprio chefe.')
+						.and('have.css', 'color', 'rgb(108, 108, 128)');
+
+					cy.get('[href="/deliver"]')
+						.should('be.visible')
+						.and('have.css', 'background-color', 'rgb(52, 203, 121)');
+						cy.get('span > svg')
+							.should('be.visible');
+						cy.get('strong')
+							.should('be.visible')
+							.and('have.text', 'Cadastre-se para fazer entregas')
+							.and('have.css', 'color', 'rgb(255, 255, 255)');
+				});
 			});
+		});
 
-			it.only(`${teste}.${complemento} - teste`, () => 
+		context(`${++contexto} - Regras de negócio.`, () => 
+		{
+			let complemento = 1;
+			describe(`${++cenario} - Validações Comportamentais.`, () => 
 			{
-				//Passo - Dado...
+				beforeEach(() => {
+					cy.visit(Cypress.env('env3'))
+				});
 
-				//Passo - Quando...
+				afterEach(() => {
+					cy.clearAllLocalStorage();
+					cy.clearAllCookies();
+					cy.clearAllSessionStorage();
+				});
 
-				//Passo - Então...
+				describe('Campo Cadastre-se para fazer entregar', () => 
+				{
+					it(`${++teste}.${complemento} - Validar clique e direcionamento de tela.`, () => 
+					{
+						//Dadoq que foi realizado um evento de clique na opção Cadastre-se para fazer entrega
+						cy.get('[href="/deliver"]')
+							.click();
+
+						//Quando o sistema carregar
+						cy.waitUntil(() =>
+							cy.get('h1')
+								.should('be.visible')
+						);
+						
+						//Então deverá direcionar para a tela de cadastro
+						cy.url()
+							.should('be.equal', 'https://buger-eats-qa.vercel.app/deliver')
+							cy.get('h1')
+								.should('be.visible')
+					});
+				});
+
+				describe('xxx', () => {
+					it(`${++teste}.${complemento} - `, () => 
+					{
+						
+					});
+
 				
+					it(`${teste}.${++complemento} - `, () => 
+					{
+							
+					});
+				});
+
+				describe('xxx', () => {
+					it(`${++teste}.${complemento} - `, () => 
+					{
+						
+					});
+
+				
+					it(`${teste}.${++complemento} - `, () => 
+					{
+							
+					});
+				});
 			});
+		});
 
-			
-			it(`${teste}.${++complemento} - `, () => 
+		let complemento = 1;
+		context.skip(`${++contexto} - End To End.`, () => 
+		{
+			describe(`${++cenario} - Fluxos Funcionais`, () => 
 			{
-				//Passo - Dado...
+				//Se houver
+				beforeEach(() => {
+					//Executa antes de cada it
+				});
 
-				//Passo - Quando...
+				//Se houver
+				afterEach(() => {
+					//Executa depois de cada it
+				});
 
-				//Passo - Então...
-				
+				it(`${++teste}.${complemento} - `, () => 
+				{
+					//Passo - Dado...
+
+					//Passo - Quando...
+
+					//Passo - Então...
+					
+				});
+
+				it(`${teste}.${++complemento} - `, () => 
+				{
+					//Passo - Dado...
+
+					//Passo - Quando...
+
+					//Passo - Então...
+					
+				});
 			});
 		});
 	});
 
-	context(`${++contexto} - Regras de negócio.`, () => 
+	// Continuar a partir daqui
+	context('Tela Cadastro', () => 
 	{
-		let complemento = 1;
-		describe(`${++cenario} - Validações Comportamentais.`, () => 
+		context(`${contexto} - Critérios de aceite.`, () => 
 		{
-			beforeEach(() => {
-				cy.Hook_AcessaPaginaCadastro();
-			});
+			let complemento = 1;
+			describe(`${cenario} - Validações Visuais.`, () => 
+			{
+				beforeEach(() => {
+					cy.Hook_AcessaPaginaCadastro();
+				});
 
-			afterEach(() => {
-				cy.clearAllLocalStorage();
+				afterEach(() => {
+					cy.clearAllLocalStorage();
 					cy.clearAllCookies();
-						cy.clearAllSessionStorage();
-			});
-
-			describe('Campo Nome', () => {
-				it(`${++teste}.${complemento} - Validar titulo principal`, () => 
-				{
-					//Dado que a pagina esta sendo visualizada
-
-					//Quando validar o titulo principal
-
-					//entao sistema de ve apresentar
-					
-					
+					cy.clearAllSessionStorage();
 				});
 
-			
-				it(`${teste}.${++complemento} - `, () => 
+				describe('Título', () =>
 				{
+					it('', () => 
+					{
 						
-				});
-			});
-
-			describe('xxx', () => {
-				it(`${++teste}.${complemento} - `, () => 
-				{
-					
+					});
 				});
 
-			
-				it(`${teste}.${++complemento} - `, () => 
+				describe('Campo Nome', () =>
 				{
+					it('', () => 
+					{
 						
-				});
-			});
-
-			describe('xxx', () => {
-				it(`${++teste}.${complemento} - `, () => 
-				{
-					
+					});
 				});
 
-			
-				it(`${teste}.${++complemento} - `, () => 
+				describe('Campo CPF', () =>
 				{
+					it('', () => 
+					{
 						
+					});
+				});
+
+				describe('Campo E-mail', () =>
+				{
+					it('', () => 
+					{
+						
+					});
+				});
+
+				describe('Campo Whatsapp', () =>
+				{
+					it('', () => 
+					{
+						
+					});
 				});
 			});
 		});
-	});
 
-	context(`${++contexto} - End To End.`, () => 
-	{
-		let complemento = 1;
-		describe(`${++cenario} - Fluxos Funcionais`, () => 
+		context(`${++contexto} - Regras de negócio.`, () => 
 		{
-			//Se houver
-			beforeEach(() => {
-				//Executa antes de cada it
-			});
-
-			//Se houver
-			afterEach(() => {
-				//Executa depois de cada it
-			});
-
-			it(`${++teste}.${complemento} - `, () => 
+			let complemento = 1;
+			describe(`${++cenario} - Validações Comportamentais.`, () => 
 			{
-				//Passo - Dado...
+				beforeEach(() => {
+					cy.Hook_AcessaPaginaCadastro();
+				});
 
-				//Passo - Quando...
+				afterEach(() => {
+					cy.clearAllLocalStorage();
+					cy.clearAllCookies();
+					cy.clearAllSessionStorage();
+				});
 
-				//Passo - Então...
-				
+				describe('Campo Nome', () =>
+				{
+					it('Validar inpuit - Letra', () => 
+					{
+						//Dado que preenchi com letras no nome
+						cy.get('[name="fullName"]')
+							.type('Nome Teste')
+						
+						//Quando realizar um evento de clique no botão de cadastrar
+						cy.get('.button-success')
+							.click();
+						
+						//Então o sistema deverá aceitar
+						//Então o sistema não deverá obrigar preenchimento
+						//Então o sistema não deverá apresentar alerta
+						cy.get('.alert-error')
+							.eq(0)
+							.should('be.visible')
+							.and('have.text', 'É necessário informar o CPF')
+					});
+
+					it('Validar inpuit - Numero', () => 
+					{
+						
+					});
+
+					it('Validar inpuit - Carac. Especial', () => 
+					{
+						
+					});
+
+					it('Validar inpuit - Combinação', () => 
+					{
+						
+					});
+				});
+
+				describe('Campo CPF', () =>
+				{
+					it.only('Validar inpuit - Letra', () => 
+					{
+						cy.get('[name="cpf"]')
+							.type('A')
+
+						cy.get('.button-success')
+							.click();
+						
+						//Então o sistema deverá aceitar
+						//Então o sistema não deverá obrigar preenchimento
+						//Então o sistema não deverá apresentar alerta
+						cy.get('.alert-error')
+							.eq(1)
+							.should('be.visible')
+							.and('have.text', 'Oops! CPF inválido')
+					});
+				});
+
+				describe('Campo E-mail', () =>
+				{
+					it('', () => 
+					{
+						
+					});
+				});
+
+				describe('Campo Whatsapp', () =>
+				{
+					it('', () => 
+					{
+						
+					});
+				});
 			});
+		});
 
-			it(`${teste}.${++complemento} - `, () => 
+		let complemento = 1;
+		context(`${++contexto} - End To End.`, () => 
+		{
+			describe(`${++cenario} - Fluxos Funcionais`, () => 
 			{
-				//Passo - Dado...
+				beforeEach(() => {
+					cy.Hook_AcessaPaginaCadastro();
+				});
 
-				//Passo - Quando...
+				afterEach(() => {
+					cy.clearAllLocalStorage();
+					cy.clearAllCookies();
+					cy.clearAllSessionStorage();
+				});
 
-				//Passo - Então...
-				
+				describe('Validar cadastro incompleto', () => {
+					it('Preenche: Nome', () =>
+					{
+						
+					});
+
+					it('Preenche: Nome & CPF', () =>
+					{
+						
+					});
+
+					it('Preenche: Nome & CPF & E-mail', () =>
+					{
+						
+					});
+				});
 			});
 		});
 	});
