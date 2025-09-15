@@ -10,141 +10,136 @@ context('nomeDaTela', () => {
 			beforeEach(() => {
 				//Executa antes de cada it
 				cy.visit(Cypress.env("env2"));
-				cy.get('.logo')
-					.should('be.visible')
-				cy.get('[href="/signup"]')
-					.click()
+					cy.get('.logo')
+						.should('be.visible');
+						cy.get('[href="/signup"]')
+							.click();
+								cy.validaPageCadastro();
 			});
 
 			//Se houver
 			afterEach(() => {
-				//Executa depois de cada it
+				cy.clearAllLocalStorage();
+					cy.clearAllCookies();
+						cy.clearAllSessionStorage();
 			});
 
 			it(`${teste}.${complemento} - Validar se a tela de cadastro está sendo apresentada`, () => {
 				//Passo - Dado...
-				
+
 				//Passo - Quando...
-				
+
+				//Passo - Então...
+				cy.validaPageCadastro()
+			});
+
+			it(`${teste}.${++complemento} - Validar botao "Voltar para home"`, () => {
+				//Passo - Dado...
+				cy.get('.button-register')
+					.click();
+
+				//Passo - Quando...
+				cy.get('[href="/"]')
+					.click();
+
 				//Passo - Então...
 				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+        			.should('eq', 'https://petlov.vercel.app/');
 			});
 
 
 			it(`${teste}.${++complemento} - Validar tentativa de cadastro com campos vazios`, () => {
 				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+				
 				//Passo - Quando...
 				cy.get('.button-register')
-					.click()
+					.click();
+
 				//Passo - Então...
 				cy.get('.alert-error')
-					.should('contain', 'Informe o seu nome completo')
-				cy.get('.alert-error').eq(1)
-					.should('contain', 'Informe o seu melhor email')
-				cy.get('.alert-error').eq(2)
-					.should('contain', 'Informe o seu CEP')
-				cy.get('.alert-error').eq(3)
-					.should('contain', 'Informe um número maior que zero')
+					.should('contain', 'Informe o seu nome completo');
+					cy.get('.alert-error').eq(1)
+						.should('contain', 'Informe o seu melhor email');
+						cy.get('.alert-error').eq(2)
+							.should('contain', 'Informe o seu CEP');
+							cy.get('.alert-error').eq(3)
+								.should('contain', 'Informe um número maior que zero');
 			});
 
 			it(`${teste}.${++complemento} - Validar busca de CEP com o campo vazio`, () => {
 				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+					
 				//Passo - Quando...
 				cy.get('input[name="cep"]')
-					.should('have.value', '')
-				cy.get('[type="button"]')
-					.click()
+					.should('have.value', '');
+					cy.get('[type="button"]')
+						.click();
+
 				//Passo - Então...
 				cy.get('.alert-error')
-					.should('contain', 'Informe um CEP válido')
-				
+					.should('contain', 'Informe um CEP válido');
+
 			});
 
 			it(`${teste}.${++complemento} - Validar se o botao "Buscar Cep" altera para "Aguarde..." ao ser clicado `, () => {
 				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+
 				//Passo - Quando...
 				cy.get('input[name="cep"]')
-					.should('have.value', '')
-				cy.get('[type="button"]')
-					.click()
+					.should('have.value', '');
+					cy.get('[type="button"]')
+						.click();
+
 				//Passo - Então...
 				cy.get('[type="button"]')
-					.should('have.value','Aguarde...')
-				
+					.should('have.value', 'Aguarde...')
+
 			});
 
 			it(`${teste}.${++complemento} - Validar busca por cep inválido`, () => {
 				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+
 				//Passo - Quando...
 				cy.get('input[name="cep"]')
-					.type('234234')
-				cy.get('[type="button"]')
-					.click()
+					.type('234234');
+					cy.get('[type="button"]')
+						.click();
+
 				//Passo - Então...
 				cy.get('.alert-error')
 					.should('have.text', 'Informe um CEP válido')
-					.and('be.visible')
+					.and('be.visible');
 			});
 
 			it(`${teste}.${++complemento} - Validar busca por cep válido`, () => {
 				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+
 				//Passo - Quando...
 				cy.get('input[name="cep"]')
-					.type('38400402')
-				cy.get('[type="button"]')
-					.click()
+					.type('38400402');
+					cy.get('[type="button"]')
+						.click();
+
 				//Passo - Então...
 				cy.get(':nth-child(3) > [type="text"]')
-					.should('not.have.value','')
-			});			
+					.should('not.have.value', '');
+			});
 
-			it.only(`${teste}.${++complemento} - Validar se a seleção de animais está funcionando`, () => {
+			it(`${teste}.${++complemento} - Validar se a seleção de animais está funcionando`, () => {
 				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
+
 				//Passo - Quando...
 				cy.get('[alt="Gatos"]')
 					.click()
+
 				//Passo - Então...
-				cy.get('[alt="Gatos"]')
-					.should('have.css', 'filter', 'none')
-					.and('have.class', 'selected')
-				});
-			
+				cy.get('.selected')
+					.should('have.class', 'selected')	
+					.and('have.css', 'border-right-color', 'rgb(52, 34, 88)');
+			});
+
 			it(`${teste}.${++complemento} - Validar cadastro com sucesso`, () => {
-				cy.CadastroSucesso()				
+				cy.CadastroSucesso()
 			});
 		});
 	});
