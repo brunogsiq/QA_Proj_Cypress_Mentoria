@@ -133,7 +133,7 @@ context('nomeDaTela', () => {
 				//Executa depois de cada it
 			});
 			
-			it.only(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com campos vazios`, () => {
+			it(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com campos vazios`, () => {
 				cy.get('.button-register')
 					.click();
 				cy.get('.alert-error')
@@ -150,7 +150,7 @@ context('nomeDaTela', () => {
 								.and('contain', 'Informe um número maior que zero');
 			});
 
-			it.only(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com `, () => {
+			it(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com `, () => {
 				cy.get('.button-register')
 					.click();
 				cy.get('.alert-error')

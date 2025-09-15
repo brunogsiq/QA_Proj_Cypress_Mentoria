@@ -5,6 +5,7 @@ import './commands/config_commands';
 import './commands/Swaglabs/login';
 import './commands/Faker_Petlov';
 import './commands/Petlov/Petlov_commands';
+import './commands/Bugereats/Bugereats_commands';
 
 Cypress.ElementSelector.defaults({
     selectorPriority: ['data-cy', 'data-test', 'data-testid', 'id', 'class', 'attributes', 'tag', 'nth-child']
