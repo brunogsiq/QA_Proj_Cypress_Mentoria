@@ -4,7 +4,7 @@ import 'cypress-file-upload';
 import './commands/config_commands';
 import './commands/Swaglabs/login';
 import './commands/Faker_Petlov';
-import './commands/validatePageCadastro';
+import './commands/Petlov/Petlov_commands';
 
 Cypress.ElementSelector.defaults({
     selectorPriority: ['data-cy', 'data-test', 'data-testid', 'id', 'class', 'attributes', 'tag', 'nth-child']

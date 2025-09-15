@@ -9,12 +9,7 @@ context('nomeDaTela', () => {
 			//Se houver
 			beforeEach(() => {
 				//Executa antes de cada it
-				cy.visit(Cypress.env("env2"));
-					cy.get('.logo')
-						.should('be.visible');
-						cy.get('[href="/signup"]')
-							.click();
-								cy.validaPageCadastro();
+				cy.Hook_AcessaPaginaCadastro();
 			});
 
 			//Se houver
@@ -30,7 +25,7 @@ context('nomeDaTela', () => {
 				//Passo - Quando...
 
 				//Passo - Então...
-				cy.validaPageCadastro()
+				cy.ValidaPaginaCadastro();
 			});
 
 			it(`${teste}.${++complemento} - Validar botao "Voltar para home"`, () => {
@@ -45,25 +40,6 @@ context('nomeDaTela', () => {
 				//Passo - Então...
 				cy.url()
         			.should('eq', 'https://petlov.vercel.app/');
-			});
-
-
-			it(`${teste}.${++complemento} - Validar tentativa de cadastro com campos vazios`, () => {
-				//Passo - Dado...
-				
-				//Passo - Quando...
-				cy.get('.button-register')
-					.click();
-
-				//Passo - Então...
-				cy.get('.alert-error')
-					.should('contain', 'Informe o seu nome completo');
-					cy.get('.alert-error').eq(1)
-						.should('contain', 'Informe o seu melhor email');
-						cy.get('.alert-error').eq(2)
-							.should('contain', 'Informe o seu CEP');
-							cy.get('.alert-error').eq(3)
-								.should('contain', 'Informe um número maior que zero');
 			});
 
 			it(`${teste}.${++complemento} - Validar busca de CEP com o campo vazio`, () => {
@@ -139,7 +115,7 @@ context('nomeDaTela', () => {
 			});
 
 			it(`${teste}.${++complemento} - Validar cadastro com sucesso`, () => {
-				cy.CadastroSucesso()
+				cy.CadastroSucesso() //mudar para o E2e
 			});
 		});
 	});
@@ -156,24 +132,39 @@ context('nomeDaTela', () => {
 			afterEach(() => {
 				//Executa depois de cada it
 			});
-
-			it(`${++teste}.${complemento} - `, () => {
-				//Passo - Dado...
-
-				//Passo - Quando...
-
-				//Passo - Então...
-
+			
+			it.only(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com campos vazios`, () => {
+				cy.get('.button-register')
+					.click();
+				cy.get('.alert-error')
+					.should('be.visible')
+					.and('contain', 'Informe o seu nome completo');
+					cy.get('.alert-error').eq(1)
+						.should('be.visible')
+						.and('contain', 'Informe o seu melhor email');
+						cy.get('.alert-error').eq(2)
+							.should('be.visible')
+							.and('contain', 'Informe o seu CEP');
+							cy.get('.alert-error').eq(3)
+								.should('be.visible')
+								.and('contain', 'Informe um número maior que zero');
 			});
 
-
-			it(`${teste}.${++complemento} - `, () => {
-				//Passo - Dado...
-
-				//Passo - Quando...
-
-				//Passo - Então...
-
+			it.only(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com `, () => {
+				cy.get('.button-register')
+					.click();
+				cy.get('.alert-error')
+					.should('be.visible')
+					.and('contain', 'Informe o seu nome completo');
+					cy.get('.alert-error').eq(1)
+						.should('be.visible')
+						.and('contain', 'Informe o seu melhor email');
+						cy.get('.alert-error').eq(2)
+							.should('be.visible')
+							.and('contain', 'Informe o seu CEP');
+							cy.get('.alert-error').eq(3)
+								.should('be.visible')
+								.and('contain', 'Informe um número maior que zero');
 			});
 		});
 	});
