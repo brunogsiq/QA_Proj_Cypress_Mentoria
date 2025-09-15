@@ -1,6 +1,3 @@
-import { randomMail, randomName } from "../../support/commands/Faker.js"
-
-
 context('nomeDaTela', () => {
 	let contexto = 1;
 	let cenario = 1;
@@ -130,7 +127,7 @@ context('nomeDaTela', () => {
 					.should('not.have.value','')
 			});			
 
-			it(`${teste}.${++complemento} - Validar se a seleção de animais está funcionando`, () => {
+			it.only(`${teste}.${++complemento} - Validar se a seleção de animais está funcionando`, () => {
 				//Passo - Dado...
 				cy.url()
 					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
@@ -143,38 +140,11 @@ context('nomeDaTela', () => {
 				//Passo - Então...
 				cy.get('[alt="Gatos"]')
 					.should('have.css', 'filter', 'none')
-					//.and('have.class', 'selected') Como faço pra fazer essas duas validações?
+					.and('have.class', 'selected')
 				});
 			
 			it(`${teste}.${++complemento} - Validar cadastro com sucesso`, () => {
-				//Passo - Dado...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/signup');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Cadastro de ponto de doação')
-                	.and('be.visible')
-				//Passo - Quando...
-				cy.get(':nth-child(2) > :nth-child(2) > .field > [type="text"]')	
-					.type(randomName)
-				cy.get('form > :nth-child(2) > :nth-child(3) > .field > [type="text"]')
-					.type(randomMail)
-				cy.get(':nth-child(3) > :nth-child(2) > :nth-child(1) > [type="text"]')
-					.type('38400402')
-				cy.get('[type="button"]')
-					.click()
-				cy.get('[type="number"]')
-					.type('123')
-				cy.get('[alt="Gatos"]')
-					.click()
-				cy.get('.button-register')
-					.click()				
-
-				//Passo - Então...
-				cy.url()
-					.should('eq', 'https://petlov.vercel.app/success');  // Valida URL
-				cy.get('h1')
-					.should('have.text', 'Você fez a diferença!')
-                	.and('be.visible')
+				cy.CadastroSucesso()				
 			});
 		});
 	});
