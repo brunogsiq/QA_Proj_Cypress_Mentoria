@@ -1,4 +1,4 @@
-context('nomeDaTela', () => 
+context('Tela de Cadastro - ', () => 
 {
 	let contexto = 1;
 	let cenario = 1;
@@ -11,16 +11,17 @@ context('nomeDaTela', () =>
 		{
 			//Se houver
 			beforeEach(() => {
-				//Executa antes de cada it
-				cy.visit(Cypress.env("env1"));
+				//cy.Hook_AcessaPaginaCadastro();
 			});
 
 			//Se houver
 			afterEach(() => {
-				//Executa depois de cada it
+				cy.clearAllLocalStorage();
+					cy.clearAllCookies();
+						cy.clearAllSessionStorage();
 			});
 
-			it(`${teste}.${complemento} - `, () => 
+			it.only(`${teste}.${complemento} - teste`, () => 
 			{
 				//Passo - Dado...
 
@@ -48,35 +49,59 @@ context('nomeDaTela', () =>
 		let complemento = 1;
 		describe(`${++cenario} - Validações Comportamentais.`, () => 
 		{
-			//Se houver
 			beforeEach(() => {
-				//Executa antes de cada it
+				cy.Hook_AcessaPaginaCadastro();
 			});
 
-			//Se houver
 			afterEach(() => {
-				//Executa depois de cada it
+				cy.clearAllLocalStorage();
+					cy.clearAllCookies();
+						cy.clearAllSessionStorage();
 			});
 
-			it(`${++teste}.${complemento} - `, () => 
-			{
-				//Passo - Dado...
+			describe('Campo Nome', () => {
+				it(`${++teste}.${complemento} - Validar titulo principal`, () => 
+				{
+					//Dado que a pagina esta sendo visualizada
 
-				//Passo - Quando...
+					//Quando validar o titulo principal
 
-				//Passo - Então...
-				
-			});
+					//entao sistema de ve apresentar
+					
+					
+				});
 
 			
-			it(`${teste}.${++complemento} - `, () => 
-			{
-				//Passo - Dado...
+				it(`${teste}.${++complemento} - `, () => 
+				{
+						
+				});
+			});
 
-				//Passo - Quando...
+			describe('xxx', () => {
+				it(`${++teste}.${complemento} - `, () => 
+				{
+					
+				});
 
-				//Passo - Então...
-				
+			
+				it(`${teste}.${++complemento} - `, () => 
+				{
+						
+				});
+			});
+
+			describe('xxx', () => {
+				it(`${++teste}.${complemento} - `, () => 
+				{
+					
+				});
+
+			
+				it(`${teste}.${++complemento} - `, () => 
+				{
+						
+				});
 			});
 		});
 	});
