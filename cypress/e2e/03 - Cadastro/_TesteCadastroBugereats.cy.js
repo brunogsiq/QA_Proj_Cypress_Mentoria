@@ -4,7 +4,7 @@ context('Buger Eats', () =>
 	let cenario = 1;
 	let teste = 1;
 
-	context('Tela Home', () => 
+	context.skip('Tela Home', () => 
 	{
 		context(`${contexto} - Critérios de aceite.`, () => 
 		{
@@ -89,7 +89,7 @@ context('Buger Eats', () =>
 				{
 					it(`${++teste}.${complemento} - Validar clique e direcionamento de tela.`, () => 
 					{
-						//Dadoq que foi realizado um evento de clique na opção Cadastre-se para fazer entrega
+						//Dado que foi realizado um evento de clique na opção Cadastre-se para fazer entrega
 						cy.get('[href="/deliver"]')
 							.click();
 
@@ -104,32 +104,6 @@ context('Buger Eats', () =>
 							.should('be.equal', 'https://buger-eats-qa.vercel.app/deliver')
 							cy.get('h1')
 								.should('be.visible')
-					});
-				});
-
-				describe('xxx', () => {
-					it(`${++teste}.${complemento} - `, () => 
-					{
-						
-					});
-
-				
-					it(`${teste}.${++complemento} - `, () => 
-					{
-							
-					});
-				});
-
-				describe('xxx', () => {
-					it(`${++teste}.${complemento} - `, () => 
-					{
-						
-					});
-
-				
-					it(`${teste}.${++complemento} - `, () => 
-					{
-							
 					});
 				});
 			});
@@ -193,25 +167,181 @@ context('Buger Eats', () =>
 
 				describe('Título', () =>
 				{
-					it('', () => 
+					it(`${teste}.${complemento} - Validar "título"`, () => //Primeiro teste V1
 					{
-						
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido o campo titulo
+						cy.get('h1')
+							.should('be.visible')
+							.and('contain.text', 'Cadastre-se para  fazer entregas')
+							.and('have.css', 'color', 'rgb(50, 33, 83)');
 					});
 				});
 
-				describe('Campo Nome', () =>
+				describe.only('Campo Nome', () =>
 				{
-					it('', () => 
+					it(`${teste}.${complemento} - Validar se o campo "nome" está visível`, () =>
 					{
-						
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se campo está visível
+						cy.get('input[name="fullName"]')
+							.should('be.visible');
 					});
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" está habilitado`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se campo está habilitado
+						cy.get('input[name="fullName"]')
+							.should('be.enabled');
+					});
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" está vazio`, () => //Primeiro teste V1
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se campo está vazio
+						cy.get('input[name="fullName"]')
+							.should('be.enabled')
+								.and('have.value', '');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" está com placeholder correto`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se o placeholder correto
+						cy.get('input[name="fullName"]')
+							.should('be.visible')
+								.and('have.attr', 'placeholder', 'Nome completo');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" está em foco`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se o campo está em foco
+							
+						cy.get('input[name="fullName"]')
+							.should('be.visible');
+							cy.get('input[name="fullName"]').realHover()
+								.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-left-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-right-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-top-color', 'rgb(52, 203, 121)')
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "nome" deve estar preenchido pra prosseguir com o cadastro`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido obrigatoriedade do preenchimento do cammpo
+							
+						cy.get('input[name="fullName"]')
+							.should('be.visible')
+							.and('have.value', '');
+							cy.get('.button-success')
+								.click();
+								cy.get(':nth-child(2) > :nth-child(2) > :nth-child(1) > .alert-error')
+									.should('be.visible')
+									.and('have.text','É necessário informar o nome');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" aceita numeros`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se o campo aceita numeros
+							
+						cy.get('input[name="fullName"]')
+							.should('be.visible')
+							.type('12345');
+							cy.get('.button-success')
+								.click();
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" aceita numeros e letras`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se o campo aceita numeros e letras
+							
+						cy.get('input[name="fullName"]')
+							.should('be.visible')
+							.type('jose123d');
+							cy.get('.button-success')
+								.click();
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "nome" aceita numeros, letras e caracteres especiais`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se o campo aceita numeros, letras e caracteres especiais
+							
+						cy.get('input[name="fullName"]')
+							.should('be.visible')
+							.type('jose1!@#23d');
+							cy.get('.button-success')
+								.click();
+					})
+
+					it(`${teste}.${++complemento} - Validar campo nome preenchido e os campos, cpf, e-mail, cep, numero, metodo de entrega e CNH nao preenchidos`, () =>
+					{
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se o campo nome esta preenchido e os campos, cpf, e-mail, cep, numero, metodo de entrega e CNH nao preenchidos
+							
+						cy.get('input[name="fullName"]')
+							.should('be.visible')
+							.type('Jose da Silva');
+							cy.get('.button-success')
+								.click();
+								cy.get(':nth-child(2) > :nth-child(2) > .alert-error')
+									.should('be.visible')
+									.and('have.text','É necessário informar o CPF');
+								cy.get(':nth-child(3) > :nth-child(1) > .alert-error')
+									.should('be.visible')
+									.and('have.text','É necessário informar o email');
+									cy.get(':nth-child(2) > :nth-child(1) > .alert-error')
+										.should('be.visible')
+										.and('have.text','É necessário informar o CEP');
+										cy.get(':nth-child(4) > :nth-child(1) > .alert-error')
+											.should('be.visible')
+											.and('have.text','É necessário informar o número do endereço');
+										cy.get(':nth-child(4) > .alert-error')
+											.should('be.visible')
+											.and('have.text','Selecione o método de entrega');
+											cy.get('form > :nth-child(6)')
+												.should('be.visible')
+												.and('have.text','Adicione uma foto da sua CNH');
+					})
 				});
 
+				//colar o describe do nome aqui e susbstituir pra cpf.
 				describe('Campo CPF', () =>
-				{
-					it('', () => 
+				{it(`${teste}.${complemento} - Validar campo "CPF"`, () => //Primeiro teste V1
 					{
-						
+						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se campo está:
+							/*
+								visivel
+								habilitado
+								vazio
+								placeholder correto
+								campo está em foco
+							*/
+						cy.get('input[name="cpf"]')
+							.should('be.visible')
+								.and('be.enabled')
+									.and('have.value', '')
+										.and('have.attr', 'placeholder', 'CPF somente números');
+										cy.get('input[name="cpf"]').realHover()
+											.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)');
 					});
 				});
 
@@ -287,7 +417,7 @@ context('Buger Eats', () =>
 
 				describe('Campo CPF', () =>
 				{
-					it.only('Validar inpuit - Letra', () => 
+					it('Validar inpuit - Letra', () => 
 					{
 						cy.get('[name="cpf"]')
 							.type('A')
