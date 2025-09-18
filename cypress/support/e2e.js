@@ -1,5 +1,6 @@
 require('cypress-wait-until');
 
+import 'cypress-real-events/support';
 import 'cypress-file-upload';
 import './commands/config_commands';
 import './commands/Swaglabs/login';
