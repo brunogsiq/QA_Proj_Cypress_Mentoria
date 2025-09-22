@@ -147,7 +147,6 @@ context('Buger Eats', () =>
 		});
 	});
 
-	// Continuar a partir daqui
 	context('Tela Cadastro', () => 
 	{
 		context(`${contexto} - Critérios de aceite.`, () => 
@@ -179,9 +178,10 @@ context('Buger Eats', () =>
 					});
 				});
 
-				describe.only('Campo Nome', () =>
+				describe('Campo Nome', () =>
 				{
-					it(`${teste}.${complemento} - Validar se o campo "nome" está visível`, () =>
+					complemento = 1;
+					it(`${++teste}.${complemento} - Validar se o campo "nome" está visível`, () =>
 					{
 						//Passo - Dado estou acessando o sistema BugerEats
 						//Passo - Quando estiver na tela de cadastro 
@@ -226,8 +226,7 @@ context('Buger Eats', () =>
 						//Passo - Então eu valido se o campo está em foco
 							
 						cy.get('input[name="fullName"]')
-							.should('be.visible');
-							cy.get('input[name="fullName"]').realHover()
+							.realHover()
 								.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)')
 								.and('have.css', 'border-left-color', 'rgb(52, 203, 121)')
 								.and('have.css', 'border-right-color', 'rgb(52, 203, 121)')
@@ -245,7 +244,8 @@ context('Buger Eats', () =>
 							.and('have.value', '');
 							cy.get('.button-success')
 								.click();
-								cy.get(':nth-child(2) > :nth-child(2) > :nth-child(1) > .alert-error')
+								cy.get('.alert-error')
+									.eq(0)
 									.should('be.visible')
 									.and('have.text','É necessário informar o nome');
 					})
@@ -257,10 +257,12 @@ context('Buger Eats', () =>
 						//Passo - Então eu valido se o campo aceita numeros
 							
 						cy.get('input[name="fullName"]')
-							.should('be.visible')
 							.type('12345');
 							cy.get('.button-success')
 								.click();
+							cy.get('input[name="fullName"]')
+								.should('have.value','12345');
+								
 					})
 
 					it(`${teste}.${++complemento} - Validar se o campo "nome" aceita numeros e letras`, () =>
@@ -321,28 +323,244 @@ context('Buger Eats', () =>
 					})
 				});
 
-				//colar o describe do nome aqui e susbstituir pra cpf.
 				describe('Campo CPF', () =>
-				{it(`${teste}.${complemento} - Validar campo "CPF"`, () => //Primeiro teste V1
+				{
+					complemento = 1;
+					it(`${++teste}.${complemento} - Validar se o campo "cpf" está visível`, () =>
 					{
-						//Passo - Dado estou acessando o sistema BugerEats
+						//Passo - Dado que estou logado no sistema Bugger eat
 						//Passo - Quando estiver na tela de cadastro 
-						//Passo - Então eu valido se campo está:
-							/*
-								visivel
-								habilitado
-								vazio
-								placeholder correto
-								campo está em foco
-							*/
+						//Passo - Então eu valido se campo está visível
+						cy.get('input[name="cpf"]')
+							.should('be.visible');
+					});
+
+					//avaliar
+					it(`${++teste}.${complemento} - Validar caracteristicas do campo`, () =>
+					{
+						//Passo - Dado que estou logado no sistema Bugger eat
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se campo está visível
 						cy.get('input[name="cpf"]')
 							.should('be.visible')
-								.and('be.enabled')
-									.and('have.value', '')
-										.and('have.attr', 'placeholder', 'CPF somente números');
-										cy.get('input[name="cpf"]').realHover()
-											.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)');
+							.and('have.attr','type', 'text')
+							.and('have.attr','name', 'cpf')
+							.and('have.attr','placeholder', 'CPF somente números')
+							.and('have.css','color','rgb(108, 108, 128)')
+							.and('be.empty')
+							.and('be.enabled')
+							.and('have.attr','type', 'number')
+							//and('')//<input type="text" name="cpf" placeholder="CPF somente números">
 					});
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" está habilitado`, () =>
+					{
+						//Passo - Dado estou na tela de cadastro
+						//Passo - Quando verifico o campo cpf 
+						//Passo - Então eu valido se campo está habilitado
+						cy.get('input[name="cpf"]')
+							.should('be.enabled');
+					});
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" está vazio`, () => //Primeiro teste V1
+					{
+						//Passo - Dado estou na tela de cadastro
+						//Passo - Quando verifico o campo cpf 
+						//Passo - Então eu valido se campo está vazio
+						cy.get('input[name="cpf"]')
+							.should('have.value', '');
+
+						cy.get('input[name="cpf"]')
+							.should('be.empty');
+
+						cy.get('input[name="cpf"]')
+						.type('123')
+
+						cy.get('input[name="cpf"]')
+						.clear()
+						.should('be.empty')
+
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" está com placeholder correto`, () =>
+					{
+						//Passo - Dado estou na tela de cadastro
+						//Passo - Quando verifico o campo cpf 
+						//Passo - Então eu valido se campo está com placeholder correto
+						cy.get('input[name="cpf"]')
+							.should('have.attr', 'placeholder', 'CPF somente números');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" está em foco`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E coloco o mouse no campo
+							.realHover()
+						//Então eu valido se campo está em foco
+								.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-left-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-right-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-top-color', 'rgb(52, 203, 121)');
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "cpf" foi preenchido com um cpf inválido`, () =>
+					{
+						//Dado que inseri um cpf imvalido
+						cy.get('input[name="cpf"]')
+							.type('12345678');
+
+						//Quando clico no botão 'Cadastre-se para fazer entregas'
+						cy.get('.button-success')
+							.click();
+
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+						cy.get('.alert-error').eq(1)
+							.should('have.text','Oops! CPF inválido');
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "cpf" foi preenchido com um cpf válido`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf invalido
+							.type('89088525064');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao o campo deve ser apresentado sem nenhuma mensagem de erro abaixo
+									cy.get('input[name="cpf"]')
+										.parent()
+										.find('.alert-error')
+										.should('not.exist')
+						//E deve estar preenchido com o nome valido digitado
+										cy.get('input[name="cpf"]')
+											.and('have.value','89088525064')
+					})
+					
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" aceita numeros e caracteres especiais`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf invalido contendo caracteres especiais e numeros
+							.type('!@#12345678');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+									cy.get('.alert-error').eq(1)
+										.should('have.text','Oops! CPF inválido');
+								
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" aceita numeros e letras`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf invalido contendo numeros e letras
+							.type('ads12345678');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+									cy.get('.alert-error').eq(1)
+										.should('have.text','Oops! CPF inválido');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" aceita quantidade abaixo de 11 caracteres`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf invalido contendo abaixo de 11 caracteres
+							.type('1234567898');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+									cy.get('.alert-error').eq(1)
+										.should('have.text','Oops! CPF inválido');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" aceita quantidade de acima de 11 caracteres`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf invalido contendo abaixo de 11 caracteres
+							.type('123456789876');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+									cy.get('.alert-error').eq(1)
+										.should('have.text','Oops! CPF inválido');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" aceita todos os caracteres iguais`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf invalido contendo abaixo de 11 caracteres
+							.type('11111111111');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+									cy.get('.alert-error').eq(1)
+										.should('have.text','Oops! CPF inválido');
+					})
+
+					it(`${teste}.${++complemento} - Validar se o campo "cpf" aceita a mascara de CPF no padrao com ponstos e digito`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf valido contendo pontos e digito
+							.type('890.885.250-64');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao deve ser apresentado a mensagem 'Oops! CPF inválido' logo abaixo do campo
+									cy.get('.alert-error').eq(1)
+										.should('have.text','Oops! CPF inválido');
+					})
+
+					it(`${teste}.${++complemento} - Validar campo cpf preenchido e os campos, nome, e-mail, cep, numero, metodo de entrega e CNH nao preenchidos`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo cpf
+						cy.get('input[name="cpf"]')
+						//E digito um cpf válido e o restantes dos campos em branco
+							.type('89088525064');
+						//E clico no botao Cadastre-se para fazer entregas
+							cy.get('.button-success')
+								.click();
+						//Entao deve ser apresentado os erros para preencher os campos vazios						
+								cy.get('.alert-error').eq(0)
+									.should('be.visible')
+									.and('have.text','É necessário informar o nome');
+									cy.get('.alert-error').eq(1)
+										.should('be.visible')
+										.and('have.text','É necessário informar o email');
+											cy.get('.alert-error').eq(2)
+												.should('be.visible')
+												.and('have.text', 'É necessário informar o CEP');
+												cy.get('.alert-error').eq(3)
+													.should('be.visible')
+													.and('have.text', 'É necessário informar o número do endereço');
+													cy.get('.alert-error').eq(4)
+														.should('be.visible')
+														.and('have.text', 'Selecione o método de entrega');
+														cy.get('.alert-error').eq(5)
+															.should('be.visible')
+															.and('have.text', 'Adicione uma foto da sua CNH');
+					})
 				});
 
 				describe('Campo E-mail', () =>
