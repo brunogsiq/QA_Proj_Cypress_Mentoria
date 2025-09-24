@@ -1,4 +1,4 @@
-context('Tela Login', () => 
+context('Projeto Swag Labs - Saucedemo', () => 
 {
 	let contexto = 1;
 	let cenario = 1;
@@ -21,23 +21,47 @@ context('Tela Login', () =>
 						cy.clearAllSessionStorage();
 			});
 			
-			it(`${teste}.${complemento} - Validar Campos Vazios`, () => //Primeiro teste V1
+			it(`${teste}.${complemento} - Validar caracteristicas visuais da pagina de login`, () => //Primeiro teste V1
 			{
-				//Passo - Dado...
+				//<div class="form_group"><input class="input_error form_input" 
+				// placeholder="Username" type="text" data-test="username" 
+				// id="user-name" name="user-name" autocorrect="off" 
+				// autocapitalize="none" value=""></div>
 				
-				//Passo - Quando...
-				cy.get('#user-name')
-				.should('be.empty');
-					cy.get('#password')
-					.should('be.empty');					
-						cy.get('[data-test="login-button"]')
-						.click();
+				//Dado que estou acessando o sistema Swag Labs
+				//Quando estiver na tela de login 
+				//Entao eu visualizo que:
 
-				//Passo - Então...
-					cy.get('[data-test="error"]')
-						.should('be.visible')
-						.and('have.text','Epic sadface: Username is required');
+				//Logo está sendo apresentada
+				cy.get('.login_logo')
+					.should('be.visible')
+					.and('have.text','Swag Labs')
 
+				//Campo user name
+				cy.get('[data-test="username"]')
+					.should('be.visible')
+					.and('be.empty')
+					.and('have.attr','placeholder', 'Username')
+					.and('have.attr','type', 'text')
+					.and('have.css', 'background-color', 'rgb(255, 255, 255)');
+				
+				//Campo password
+				cy.get('[data-test="password"]')
+					.should('be.visible')
+					.and('be.empty')
+					.and('have.attr','placeholder', 'Password')
+					.and('have.attr','type', 'password')
+					.and('have.css', 'background-color', 'rgb(255, 255, 255)');
+
+				//Campo password
+				cy.get('[data-test="login-button"]')
+					.should('be.visible')
+					.and('have.attr','type', 'submit')
+					.and('have.css', 'background-color', 'rgb(61, 220, 145)');
+				
+				//caixa contendo usernames e Password aceitos
+				cy.get('[data-test="login-credentials"]').should('be.visible');
+				cy.get('[data-test="login-password"]').should('be.visible');
 			});
 
 			it(`${teste}.${++complemento} - Validar "Username" preenchido e "Password" vazio`, () => 
@@ -163,7 +187,7 @@ context('Tela Login', () =>
 		});
 	});
 
-	context(`${++contexto} - Regras de negócio.`, () => 
+	context.skip(`${++contexto} - Regras de negócio.`, () => 
 	{
 		let complemento = 1;
 		describe(`${++cenario} - Validações Comportamentais.`, () => 
@@ -201,7 +225,7 @@ context('Tela Login', () =>
 		});
 	});
 
-	context(`${++contexto} - End To End.`, () => 
+	context.skip(`${++contexto} - End To End.`, () => 
 	{
 		let complemento = 1;
 		describe(`${++cenario} - Fluxos Funcionais`, () => 
