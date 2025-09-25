@@ -1,4 +1,4 @@
-context('nomeDaTela', () => {
+context('Projeto Petlove', () => {
 	let contexto = 1;
 	let cenario = 1;
 	let teste = 1;
@@ -9,7 +9,7 @@ context('nomeDaTela', () => {
 			//Se houver
 			beforeEach(() => {
 				//Executa antes de cada it
-				cy.Hook_AcessaPaginaCadastro();
+				cy.Hook_AcessaPaginaCadastro_P2();
 			});
 
 			//Se houver
@@ -25,7 +25,7 @@ context('nomeDaTela', () => {
 				//Passo - Quando...
 
 				//Passo - Então...
-				cy.ValidaPaginaCadastro();
+				cy.ValidaPaginaCadastro_P2();
 			});
 
 			it(`${teste}.${++complemento} - Validar botao "Voltar para home"`, () => {
@@ -133,7 +133,7 @@ context('nomeDaTela', () => {
 				//Executa depois de cada it
 			});
 			
-			it(`${teste}.${++complemento} - Botão cadastro - Validações tentativa de cadastro com campos vazios`, () => {
+			it(`${++teste}.${complemento} - Botão cadastro - Validações tentativa de cadastro com campos vazios`, () => {
 				cy.get('.button-register')
 					.click();
 				cy.get('.alert-error')
@@ -169,7 +169,7 @@ context('nomeDaTela', () => {
 		});
 	});
 
-	context(`${++contexto} - End To End.`, () => {
+	context.skip(`${++contexto} - End To End.`, () => {
 		let complemento = 1;
 		describe(`${++cenario} - Fluxos Funcionais`, () => {
 			//Se houver

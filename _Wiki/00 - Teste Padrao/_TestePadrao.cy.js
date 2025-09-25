@@ -1,4 +1,4 @@
-context('nomeDaTela', () => 
+context('Projeto - ...', () => 
 {
 	let contexto = 1;
 	let cenario = 1;
@@ -7,42 +7,50 @@ context('nomeDaTela', () =>
 	context(`${contexto} - Critérios de aceite.`, () => 
 	{
 		let complemento = 1;
-		describe(`${cenario} - Validações Visuais.`, () => 
+		
+		context('Nome tela', () => 
 		{
-			//Se houver
-			beforeEach(() => {
-				//Executa antes de cada it
-				cy.visit(Cypress.env("env1"));
-			});
-
-			//Se houver
-			afterEach(() => {
-				//Executa depois de cada it
-			});
-
-			it(`${teste}.${complemento} - `, () => 
+			describe(`${cenario} - Validações Visuais.`, () => 
 			{
-				//Passo - Dado...
+				describe('Nome do campo', () => 
+				{
+					//Se houver
+					beforeEach(() => {
+						//Executa antes de cada it
+						cy.visit(Cypress.env("env1"));
+					});
 
-				//Passo - Quando...
+					//Se houver
+					afterEach(() => {
+						//Executa depois de cada it
+					});
 
-				//Passo - Então...
-				
-			});
+					it(`${teste}.${complemento} - `, () => 
+					{
+						//Passo - Dado...
 
-			
-			it(`${teste}.${++complemento} - `, () => 
-			{
-				//Passo - Dado...
+						//Passo - Quando...
 
-				//Passo - Quando...
+						//Passo - Então...
+						
+					});
 
-				//Passo - Então...
-				
+					
+					it(`${teste}.${++complemento} - `, () => 
+					{
+						//Passo - Dado...
+
+						//Passo - Quando...
+
+						//Passo - Então...
+						
+					});
+				});
 			});
 		});
 	});
 
+	//verificar
 	context(`${++contexto} - Regras de negócio.`, () => 
 	{
 		let complemento = 1;
@@ -81,6 +89,7 @@ context('nomeDaTela', () =>
 		});
 	});
 
+	//verificar
 	context(`${++contexto} - End To End.`, () => 
 	{
 		let complemento = 1;

@@ -3,8 +3,8 @@ require('cypress-wait-until');
 import 'cypress-real-events/support';
 import 'cypress-file-upload';
 import './commands/config_commands';
-import './commands/Swaglabs/login';
 import './commands/Faker_Petlov';
+import './commands/Swaglabs/login';
 import './commands/Petlov/Petlov_commands';
 import './commands/Bugereats/Bugereats_commands';
 

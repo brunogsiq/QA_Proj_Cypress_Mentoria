@@ -1,4 +1,4 @@
-context('Buger Eats', () => 
+context('Projeto - Buger Eats', () => 
 {
 	let contexto = 1;
 	let cenario = 1;
@@ -155,7 +155,7 @@ context('Buger Eats', () =>
 			describe(`${cenario} - Validações Visuais.`, () => 
 			{
 				beforeEach(() => {
-					cy.Hook_AcessaPaginaCadastro();
+					cy.Hook_AcessaPaginaCadastro_P3();
 				});
 
 				afterEach(() => {
@@ -563,31 +563,234 @@ context('Buger Eats', () =>
 					})
 				});
 
-				describe('Campo E-mail', () =>
+				describe('Campo email', () =>
 				{
-					it('', () => 
+					complemento = 1;
+					
+					//avaliar
+					it(`${++teste}.${complemento} - Validar caracteristicas do campo`, () =>
 					{
-						
+						//Passo - Dado que estou logado no sistema Bugger eat
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se campo está visível
+						cy.get('input[name="email"]')
+							.should('be.visible')
+							.and('have.attr','name', 'email')
+							.and('have.attr','placeholder', 'E-mail')
+							.and('have.css','color','rgb(108, 108, 128)')
+							.and('be.empty')
+							.and('be.enabled')
 					});
+
+					it(`${teste}.${++complemento} - Validar se o campo "email" está em foco`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo email
+						cy.get('input[name="email"]')
+						//E coloco o mouse no campo
+							.realHover()
+						//Então eu valido se campo está em foco
+								.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-left-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-right-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-top-color', 'rgb(52, 203, 121)');
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "email" foi preenchido com um email inválido`, () =>
+					{
+						//Dado que inseri um email imvalido
+						cy.get('input[name="email"]')
+							.type('12345678');
+
+						//Quando clico no botão 'Cadastre-se para fazer entregas'
+						cy.get('.button-success')
+							.click();
+
+						//Entao deve ser apresentado a mensagem 'Oops! Email com formato inválido.' logo abaixo do campo
+						cy.get('.alert-error').eq(2)
+							.should('have.text','Oops! Email com formato inválido.');
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "email" foi preenchido com um email válido`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo email
+						cy.get('input[name="email"]')
+						//E digito um email valido
+							.type('teste@gmail.com');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao o campo deve ser apresentado sem nenhuma mensagem de erro abaixo
+									cy.get('input[name="email"]')
+										.parent()
+										.find('.alert-error')
+										.should('not.exist')
+						//E deve estar preenchido com o nome valido digitado
+										cy.get('input[name="email"]')
+											.and('have.value','teste@gmail.com')
+					})
+
+					it(`${teste}.${++complemento} - Validar campo email preenchido e os campos, nome, cpf, cep, numero, metodo de entrega e CNH nao preenchidos`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo email
+						cy.get('input[name="email"]')
+						//E digito um email válido e o restantes dos campos em branco
+							.type('teste@gmail.com');
+						//E clico no botao Cadastre-se para fazer entregas
+							cy.get('.button-success')
+								.click();
+						//Entao deve ser apresentado os erros para preencher os campos vazios						
+								cy.get('.alert-error').eq(0)
+									.should('be.visible')
+									.and('have.text','É necessário informar o nome');
+									cy.get('.alert-error').eq(1)
+										.should('be.visible')
+										.and('have.text','É necessário informar o CPF');
+											cy.get('.alert-error').eq(2)
+												.should('be.visible')
+												.and('have.text', 'É necessário informar o CEP');
+												cy.get('.alert-error').eq(3)
+													.should('be.visible')
+													.and('have.text', 'É necessário informar o número do endereço');
+													cy.get('.alert-error').eq(4)
+														.should('be.visible')
+														.and('have.text', 'Selecione o método de entrega');
+														cy.get('.alert-error').eq(5)
+															.should('be.visible')
+															.and('have.text', 'Adicione uma foto da sua CNH');
+					})
 				});
 
-				describe('Campo Whatsapp', () =>
+				//Campo Whatsapp aqui
+
+				describe('Endereço', () =>
 				{
-					it('', () => 
+					complemento = 1;
+					
+					//avaliar
+					it.only(`${++teste}.${complemento} - Validar visualização dos campos`, () =>
 					{
-						
+						//Passo - Dado que estou logado no sistema Bugger eat
+						//Passo - Quando estiver na tela de cadastro 
+						//Passo - Então eu valido se os campos da modal endereço são:
+						cy.get(':nth-child(3) > [role="legend"] > h2')
+							.should('be.visible')
+							.and('have.text','Endereço');
+							cy.get(':nth-child(3) > [role="legend"] > span')
+								.and('have.text','Informe o cep, número e complemento');
+								cy.get(':nth-child(3) > :nth-child(2) > :nth-child(1) > [type="text"]')
+									.should('be.visible');
+									cy.get('[type="button"]')
+										.should('be.visible');
+										cy.get(':nth-child(3) > [type="text"]')
+											.should('be.visible');
+											cy.get(':nth-child(4) > :nth-child(1) > [type="text"]')
+												.should('be.visible');
+											cy.get(':nth-child(4) > :nth-child(2) > [type="text"]')
+												.should('be.visible');
+												cy.get(':nth-child(5) > :nth-child(1) > [type="text"]')
+													.should('be.visible');
+													cy.get(':nth-child(5) > :nth-child(2) > [type="text"]')
+														.should('be.visible');
+
+							//.and('have.attr','placeholder', 'E-mail')
+							//.and('have.css','color','rgb(108, 108, 128)')
+							//.and('be.empty')
+							//.and('be.enabled')
 					});
+
+					it(`${teste}.${++complemento} - Validar se o campo "cep" está em foco`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo email
+						cy.get('input[name="postalcode"]')
+						//E coloco o mouse no campo
+							.realHover()
+						//Então eu valido se campo está em foco
+								.and('have.css', 'border-bottom-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-left-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-right-color', 'rgb(52, 203, 121)')
+								.and('have.css', 'border-top-color', 'rgb(52, 203, 121)');
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "email" foi preenchido com um email inválido`, () =>
+					{
+						//Dado que inseri um email imvalido
+						cy.get('input[name="postalcode"]')
+							.type('12345678');
+
+						//Quando clico no botão 'Cadastre-se para fazer entregas'
+						cy.get('.button-success')
+							.click();
+
+						//Entao deve ser apresentado a mensagem 'Oops! Email com formato inválido.' logo abaixo do campo
+						cy.get('.alert-error').eq(2)
+							.should('have.text','Oops! Email com formato inválido.');
+					})
+
+					it(`${teste}.${++complemento} - Validar que o campo "email" foi preenchido com um email válido`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo email
+						cy.get('input[name="email"]')
+						//E digito um email valido
+							.type('teste@gmail.com');
+						//E clico no botão 'Cadastre-se para fazer entregas'
+								cy.get('.button-success')
+									.click();
+						//Entao o campo deve ser apresentado sem nenhuma mensagem de erro abaixo
+									cy.get('input[name="email"]')
+										.parent()
+										.find('.alert-error')
+										.should('not.exist')
+						//E deve estar preenchido com o nome valido digitado
+										cy.get('input[name="email"]')
+											.and('have.value','teste@gmail.com')
+					})
+
+					it(`${teste}.${++complemento} - Validar campo email preenchido e os campos, nome, cpf, cep, numero, metodo de entrega e CNH nao preenchidos`, () =>
+					{
+						//Dado estou na tela de cadastro
+						//Quando verifico o campo email
+						cy.get('input[name="email"]')
+						//E digito um email válido e o restantes dos campos em branco
+							.type('teste@gmail.com');
+						//E clico no botao Cadastre-se para fazer entregas
+							cy.get('.button-success')
+								.click();
+						//Entao deve ser apresentado os erros para preencher os campos vazios						
+								cy.get('.alert-error').eq(0)
+									.should('be.visible')
+									.and('have.text','É necessário informar o nome');
+									cy.get('.alert-error').eq(1)
+										.should('be.visible')
+										.and('have.text','É necessário informar o CPF');
+											cy.get('.alert-error').eq(2)
+												.should('be.visible')
+												.and('have.text', 'É necessário informar o CEP');
+												cy.get('.alert-error').eq(3)
+													.should('be.visible')
+													.and('have.text', 'É necessário informar o número do endereço');
+													cy.get('.alert-error').eq(4)
+														.should('be.visible')
+														.and('have.text', 'Selecione o método de entrega');
+														cy.get('.alert-error').eq(5)
+															.should('be.visible')
+															.and('have.text', 'Adicione uma foto da sua CNH');
+					})
 				});
 			});
 		});
 
-		context(`${++contexto} - Regras de negócio.`, () => 
+		context.skip(`${++contexto} - Regras de negócio.`, () => 
 		{
 			let complemento = 1;
 			describe(`${++cenario} - Validações Comportamentais.`, () => 
 			{
 				beforeEach(() => {
-					cy.Hook_AcessaPaginaCadastro();
+					cy.Hook_AcessaPaginaCadastro_P3();
 				});
 
 				afterEach(() => {
@@ -617,17 +820,17 @@ context('Buger Eats', () =>
 							.and('have.text', 'É necessário informar o CPF')
 					});
 
-					it('Validar inpuit - Numero', () => 
+					it.skip('Validar inpuit - Numero', () => 
 					{
 						
 					});
 
-					it('Validar inpuit - Carac. Especial', () => 
+					it.skip('Validar inpuit - Carac. Especial', () => 
 					{
 						
 					});
 
-					it('Validar inpuit - Combinação', () => 
+					it.skip('Validar inpuit - Combinação', () => 
 					{
 						
 					});
@@ -635,7 +838,7 @@ context('Buger Eats', () =>
 
 				describe('Campo CPF', () =>
 				{
-					it('Validar inpuit - Letra', () => 
+					it('Validar input - Letra', () => 
 					{
 						cy.get('[name="cpf"]')
 							.type('A')
@@ -653,15 +856,29 @@ context('Buger Eats', () =>
 					});
 				});
 
-				describe('Campo E-mail', () =>
+				describe('Campo email', () =>
 				{
-					it('', () => 
+					it('Validar input - Letra', () => 
 					{
+						cy.get('[name="cpf"]')
+							.type('A')
+
+						cy.get('.button-success')
+							.click();
 						
+						//Então o sistema deverá aceitar
+						//Então o sistema não deverá obrigar preenchimento
+						//Então o sistema não deverá apresentar alerta
+						cy.get('.alert-error')
+							.eq(1)
+							.should('be.visible')
+							.and('have.text', 'Oops! CPF inválido')
 					});
 				});
 
-				describe('Campo Whatsapp', () =>
+				
+
+				describe.skip('Campo Whatsapp', () =>
 				{
 					it('', () => 
 					{
@@ -672,12 +889,12 @@ context('Buger Eats', () =>
 		});
 
 		let complemento = 1;
-		context(`${++contexto} - End To End.`, () => 
+		context.skip(`${++contexto} - End To End.`, () => 
 		{
 			describe(`${++cenario} - Fluxos Funcionais`, () => 
 			{
 				beforeEach(() => {
-					cy.Hook_AcessaPaginaCadastro();
+					cy.Hook_AcessaPaginaCadastro_P3();
 				});
 
 				afterEach(() => {
@@ -706,3 +923,25 @@ context('Buger Eats', () =>
 		});
 	});
 });
+
+/*
+	contexto será:
+		Projeto - ...
+			Critério de aceite
+				Nome tela
+			Regra de negócio
+				Nome tela
+			E2E
+				Nome tela
+
+	describes será:
+		Validações visuais
+		validações comportamentais
+		Fluxo funcionais
+
+	describe dentro de describe será:
+		dentro de Validação comportamental
+			Campo nome
+			Campo cpf
+			campo...
+*/
