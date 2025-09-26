@@ -8,10 +8,6 @@ npm install --save-dev cypress-real-events
 import 'cypress-real-events/support';
 
 cy.get('.field').realHover();
-cy.get('input[name="fullName"]').should('have.css', 'border-bottom-color', 'rgb(0, 128, 0)');
+cy.get('[type="button"]').should('have.css', 'border-bottom-color', 'rgb(0, 128, 0)');
 
 
-describe('Endereço', () =>
-				{
-					
-				});
