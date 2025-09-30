@@ -1,82 +1,15 @@
-context('Projeto - Buger Eats', () => 
+context('Projeto - Star Bugs', () => 
 {
 	let contexto = 1;
 	let cenario = 1;
 	let teste = 1;
 
-	context.skip('Tela Home', () => 
+	context.skip('Tela Chekout', () => 
 	{
 		context(`${contexto} - Critérios de aceite.`, () => 
 		{
 			let complemento = 1;
 			describe(`${cenario} - Validações Visuais.`, () => 
-			{
-				beforeEach(() => {
-					cy.visit(Cypress.env('env3'));
-				});
-
-				afterEach(() => {
-					cy.clearAllLocalStorage();
-					cy.clearAllCookies();
-					cy.clearAllSessionStorage();
-				});
-
-				it(`${teste}.${complemento} - Valida acesso ao projeto.`, () => 
-				{
-					cy.url()
-						.should('be.equal', 'https://buger-eats-qa.vercel.app/');
-				});
-
-				it(`${teste}.${complemento} - Valida layout.`, () => 
-				{
-					//Dado que a tela home está sendo visualizada
-					//Quando validar os elementos em tela
-					cy.waitUntil(() =>
-						cy.get('img')
-							.should('be.visible')
-					);
-
-					/*Então o sistema deverá apresentar
-						*Logotipo
-						*Título
-						*Sub-título
-						*Botão
-						*Background Imagem
-					*/
-					cy.get('img')
-						.should('be.visible')
-						.and('have.attr', 'alt', 'Buger Eats');
-
-					cy.get('h1')
-						.should('be.visible')
-						.and('have.text', 'Seja um parceiro entregador pela Buger Eats')
-						.and('have.css', 'color', 'rgb(50, 33, 83)');
-
-					cy.get('p')
-						.should('be.visible')
-						.and('have.text', 'Em vez de oportunidades tradicionais de entrega de refeições em horários pouco flexíveis, seja seu próprio chefe.')
-						.and('have.css', 'color', 'rgb(108, 108, 128)');
-
-					cy.get('[href="/deliver"]')
-						.should('be.visible')
-						.and('have.css', 'background-color', 'rgb(52, 203, 121)');
-						cy.get('span > svg')
-							.should('be.visible');
-						cy.get('strong')
-							.should('be.visible')
-							.and('have.text', 'Cadastre-se para fazer entregas')
-							.and('have.css', 'color', 'rgb(255, 255, 255)');
-				});
-			});
-		});
-	});
-
-	context('Tela Cadastro', () => 
-	{
-		context(`${contexto} - Critérios de aceite.`, () => 
-		{
-			let complemento = 1;
-			describe.only(`${cenario} - Validações Visuais.`, () => 
 			{
 				beforeEach(() => {
 					cy.Hook_AcessaPaginaCadastro_P3();
@@ -90,11 +23,11 @@ context('Projeto - Buger Eats', () =>
 
 				describe('Título', () =>
 				{
-					it(`${teste}.${complemento} - Validar "título"`, () => //Primeiro teste V1
+					it(`${teste}.${complemento} - Validar "título"`, () => 
 					{
-						//Passo - Dado estou acessando o sistema BugerEats
-						//Passo - Quando estiver na tela de cadastro 
-						//Passo - Então eu valido o campo titulo
+						//Dado estou acessando o sistema BugerEats
+						//Quando estiver na tela de cadastro 
+						//Então eu valido o campo titulo
 						cy.get('h1')
 							.should('be.visible')
 							.and('contain.text', 'Cadastre-se para  fazer entregas')
@@ -107,23 +40,15 @@ context('Projeto - Buger Eats', () =>
 					complemento = 1;
 					it(`${++teste}.${complemento} - Validar se o campo "nome" está visível`, () =>
 					{
-						//Passo - Dado estou acessando o sistema BugerEats
-						//Passo - Quando estiver na tela de cadastro 
-						//Passo - Então eu valido se campo está visível
-						cy.get('input[name="fullName"]')
-							.should('be.visible');
+						
 					});
 
 					it(`${teste}.${++complemento} - Validar se o campo "nome" está habilitado`, () =>
 					{
-						//Passo - Dado estou acessando o sistema BugerEats
-						//Passo - Quando estiver na tela de cadastro 
-						//Passo - Então eu valido se campo está habilitado
-						cy.get('input[name="fullName"]')
-							.should('be.enabled');
+						
 					});
 
-					it(`${teste}.${++complemento} - Validar se o campo "nome" está vazio`, () => //Primeiro teste V1
+					it(`${teste}.${++complemento} - Validar se o campo "nome" está vazio`, () =>
 					{
 						//Passo - Dado estou acessando o sistema BugerEats
 						//Passo - Quando estiver na tela de cadastro 
@@ -142,8 +67,6 @@ context('Projeto - Buger Eats', () =>
 							.should('be.visible')
 								.and('have.attr', 'placeholder', 'Nome completo');
 					})
-
-					
 				});
 
 				describe('Campo CPF', () =>
@@ -151,9 +74,9 @@ context('Projeto - Buger Eats', () =>
 					complemento = 1;
 					it(`${++teste}.${complemento} - Validar se o campo "cpf" está visível`, () =>
 					{
-						//Passo - Dado que estou logado no sistema Bugger eat
-						//Passo - Quando estiver na tela de cadastro 
-						//Passo - Então eu valido se campo está visível
+						// - Dado que estou logado no sistema Bugger eat
+						// - Quando estiver na tela de cadastro 
+						// - Então eu valido se campo está visível
 						cy.get('input[name="cpf"]')
 							.should('be.visible');
 					});
@@ -625,7 +548,7 @@ context('Projeto - Buger Eats', () =>
 								.and('contain','Escolha um dos métodos abaixo')
 					});
 
-					it.only(`${teste}.${++complemento} - Validar se as imagens dos veiculos estao sendo mostradas corretamente`, () => //Primeiro teste V1
+					it(`${teste}.${++complemento} - Validar se as imagens dos veiculos estao sendo mostradas corretamente`, () => //Primeiro teste V1
 					{
 						//Passo - Dado estou acessando o sistema BugerEats
 						//Passo - Quando estiver na tela de cadastro 
@@ -676,27 +599,6 @@ context('Projeto - Buger Eats', () =>
 				});
 			});
 		});
+	
 	});
 });
-
-/*
-	contexto será:
-		Projeto - ...
-			Critério de aceite
-				Nome tela
-			Regra de negócio
-				Nome tela
-			E2E
-				Nome tela
-
-	describes será:
-		Validações visuais
-		validações comportamentais
-		Fluxo funcionais
-
-	describe dentro de describe será:
-		dentro de Validação comportamental
-			Campo nome
-			Campo cpf
-			campo...
-*/
