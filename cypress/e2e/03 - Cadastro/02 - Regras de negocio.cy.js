@@ -694,7 +694,7 @@ context('Projeto - Buger Eats', () =>
 							.attachFile('/' + 'cnh.jpeg')
 					})
 
-					it.only(`${teste}.${++complemento} - Validar se após o upload a imagem aparece na tela`, () =>
+					it(`${teste}.${++complemento} - Validar se após o upload a imagem aparece na tela`, () =>
 					{
 						//Dado estou acessando o sistema BugerEats
 						//Quando estiver na tela de cadastro
