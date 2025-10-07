@@ -1,9 +1,9 @@
 //Projeto > tela > criterios de aceite
 context('Projeto - Star Bugs', () => 
 {
-	let contexto = 1;
-	let cenario = 1;
-	let teste = 1;
+	let contexto = 4;
+	let cenario = 4;
+	let teste = 4;
 
 	context('Tela Home', () => 
 	{
@@ -26,6 +26,8 @@ context('Projeto - Star Bugs', () =>
 
 				describe(`${cenario} - Cabeçalho.`, () => {
 					
+					let complemento = 1
+
 					it(`${teste}.${complemento} - Validar acesso ao projeto.`, () => 
 					{
 					//Dado que eu acesso o ssistema 'starbugs'
@@ -35,7 +37,7 @@ context('Projeto - Star Bugs', () =>
 						.should('be.equal', 'https://starbugs.vercel.app/');
 					});
 
-					it(`${teste}.${complemento} - Validar titulo`, () => 
+					it(`${teste}.${++complemento} - Validar titulo`, () => 
 					{
 					//Dado que eu acesso o ssistema 'starbugs'
 					//Quando estiver acessando a tela home
@@ -48,7 +50,7 @@ context('Projeto - Star Bugs', () =>
 							.should('be.visible')
 					});
 
-					it(`${teste}.${complemento} - Validar sub-titulo`, () => 
+					it(`${teste}.${++complemento} - Validar sub-titulo`, () => 
 					{
 					//Dado que eu acesso o ssistema 'starbugs'
 					//Quando estiver acessando a tela home
@@ -78,6 +80,7 @@ context('Projeto - Star Bugs', () =>
 				});
 
 				describe(`${cenario} - Seçao 01 - Banner.`, () => {
+					let complemento = 1
 					it(`${teste}.${complemento} - Validar titulo`, () => 
 					{
 					//Dado que estou na tela home
@@ -88,7 +91,7 @@ context('Projeto - Star Bugs', () =>
 						.and('have.text','Bora tomar um café? Nós levamos até você! ')
 					});
 
-					it(`${teste}.${complemento} - Validar sub-titulo`, () => 
+					it(`${teste}.${++complemento} - Validar sub-titulo`, () => 
 					{
 					//Dado que estou na tela home
 					//Quando visualizar o banner
@@ -98,7 +101,7 @@ context('Projeto - Star Bugs', () =>
 						.and('have.text','O melhor café de são paulo, porque bug somente no nome.')
 					});
 
-					it(`${teste}.${complemento} - Validar informações`, () => 
+					it(`${teste}.${++complemento} - Validar informações`, () => 
 					{
 					//Dado que estou na tela home
 					//Quando visualizar o banner
@@ -131,7 +134,7 @@ context('Projeto - Star Bugs', () =>
 											.and('be.visible');
 					});
 
-					it(`${teste}.${complemento} - Validar imagem do lado direito`, () => 
+					it(`${teste}.${++complemento} - Validar imagem do lado direito`, () => 
 					{
 					//Dado que estou na tela home
 					//Quando visualizar o banner
@@ -139,12 +142,60 @@ context('Projeto - Star Bugs', () =>
 					//Entao eu valido a imagem da empresa sendo mostrada do lado direito
 						.should('be.visible')
 					});
-
-					
 				});
 
 				describe(`${cenario} - Seção 02 - Produtos mais vendidos.`, () => {
+					let complemento = 1
+					it(`${teste}.${complemento} - Validar titulo`, () => 
+					{
+					//Dado que estou na tela home
+					//Quando estiver na seção produtos mais vendidos
+					cy.get('.kDQXiX')
+					//Entao eu valido o titulo da sessão
+						.should('be.visible')
+						.and('have.text','Produtos mais vendidos')
+						.and('have.css','color','rgb(64, 57, 55)');
+					});
+
+					it(`${teste}.${++complemento} - Validar informações do produto "Expresso Tradicional"`, () => 
+					{
+					//Dado que estou na tela home
+					//Quando estiver na seção produtos mais vendidos
+					//Entao eu valido as informações do produto "Expresso Tradicional
+					//Deve exibir a imagem do produto
+						cy.get('.coffee-item img')
+							.should('be.visible')
+							.and(($img) => {
+								expect($img[0].naturalWidth).to.be.greaterThan(0); // garante que a imagem foi carregada
+							});
 					
+						//Deve exibir a tag "tradicional"
+						cy.get('.coffee-tags span').eq(0)
+							.should('have.text', 'tradicional');
+						
+							//Deve exibir o nome do café "Expresso tradicional"
+							cy.get(':nth-child(1) > .sc-ezOQGI')
+								.should('be.visible')
+								.and('have.text','Expresso Tradicional')
+
+								//'Deve exibir a descrição do café'
+								cy.get('.coffee-desc')
+									.should('be.visible')
+									.and('contain.text', 'O tradicional café feito com água quente e grãos moídos');
+								
+									//Deve exibir o preço do café
+									cy.get('.coffee-price').eq(4).within(() => {
+											cy.contains('R$').should('be.visible');
+											cy.contains('9,99').should('be.visible')
+											.should('have.attr','color','text');
+									});
+										
+										//Deve validar o botão comprar
+												cy.get('.buy-coffee').eq(0)
+													.should('be.visible')
+													.and('have.text','Comprar')
+													.and('have.css','background-color','rgb(0, 121, 82)')
+						});
 				});
 			});
 		});
